@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كوكيز بروسل | تقرير أداء الحملات - مارس</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"IBM Plex Sans Arabic"', 'sans-serif'],
+                        en: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            purple: '#5B2C6F',    /* لون بنفسجي فاخر */
+                            purpleLight: '#8E44AD',
+                            gold: '#D4AF37',      /* لون ذهبي فاتح/بني ذهبي */
+                            goldLight: '#F9E79F',
+                            bg: '#FDFCFD',        /* أبيض مائل للدفء قليلاً */
+                            surface: '#FFFFFF',
+                        }
+                    },
+                    boxShadow: {
+                        'premium': '0 4px 20px -2px rgba(91, 44, 111, 0.05), 0 0 3px rgba(0,0,0,0.02)',
+                        'premium-hover': '0 10px 30px -4px rgba(91, 44, 111, 0.1), 0 0 4px rgba(0,0,0,0.03)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5B2C6F; }
+
+        /* Print Styles */
+        @media print {
+            body { background-color: white !important; }
+            .no-print { display: none !important; }
+            .print-break { page-break-before: always; }
+            .shadow-premium { box-shadow: none !important; border: 1px solid #e5e7eb !important; }
+        }
+
+        /* Smooth reveal animations */
+        .reveal { opacity: 0; transform: translateY(15px); transition: all 0.6s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .progress-bar-anim { width: 0; transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    </style>
+</head>
+<body class="bg-brand-bg text-slate-800 antialiased selection:bg-brand-gold selection:text-white">
+
+    <!-- Top Navigation / Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-purple flex items-center justify-center text-white font-en font-bold text-xl shadow-lg shadow-brand-purple/20">
+                    b
+                </div>
+                <div>
+                    <h1 class="font-en font-bold text-2xl tracking-tight text-brand-purple">brussle</h1>
+                    <p class="text-xs text-gray-500 font-medium -mt-1">تقرير أداء الحملات • مارس</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    اكتملت الحملة
+                </span>
+                <button onclick="window.print()" class="flex items-center gap-2 px-5 py-2.5 bg-brand-purple hover:bg-brand-purpleLight text-white rounded-lg text-sm font-medium transition-all shadow-md shadow-brand-purple/20">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    تصدير التقرير
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- Section 1: Executive Summary -->
+        <section class="reveal">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">الملخص التنفيذي</h2>
+                <p class="text-gray-500 text-sm mt-1">نظرة عامة على الأداء المالي والوصول لجميع المنصات خلال شهر مارس.</p>
+            </div>
+
+            <!-- Main KPIs -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- Highlight Card -->
+                <div class="col-span-1 lg:col-span-2 bg-gradient-to-br from-brand-purple to-brand-purpleLight rounded-2xl p-6 text-white shadow-premium relative overflow-hidden">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <div class="flex items-center justify-between opacity-90 mb-2">
+                                <span class="text-sm font-medium text-brand-goldLight">إجمالي الإنفاق</span>
+                                <i data-lucide="wallet" class="w-5 h-5 text-brand-goldLight"></i>
+                            </div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-bold font-en tracking-tight">1,668.61</span>
+                                <span class="text-sm text-brand-goldLight">ريال</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/20">
+                            <p class="text-sm leading-relaxed opacity-90">
+                                الهدف الاستراتيجي: <strong class="text-brand-goldLight">زيادة الوعي، الزيارات، واكتساب متابعين جدد.</strong> تم توجيه الميزانية بنجاح لتحقيق وصول واسع بتكلفة نقر ممتازة.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub KPIs -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-premium flex flex-col justify-center">
+                    <div class="flex items-center gap-3 mb-3 text-gray-500">
+                        <div class="p-2 bg-blue-50 rounded-lg text-blue-600"><i data-lucide="eye" class="w-4 h-4"></i></div>
+                        <span class="text-sm font-medium">إجمالي الظهور</span>
+                    </div>
+                    <div class="text-3xl font-bold text-slate-900 font-en">153.4K</div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-premium flex flex-col justify-center">
+                    <div class="flex items-center gap-3 mb-3 text-gray-500">
+                        <div class="p-2 bg-brand-purple/10 rounded-lg text-brand-purple"><i data-lucide="users" class="w-4 h-4"></i></div>
+                        <span class="text-sm font-medium">الوصول الفريد</span>
+                    </div>
+                    <div class="text-3xl font-bold text-slate-900 font-en">62.7K</div>
+                    <p class="text-xs text-gray-400 mt-2">متوسط التكرار: <span class="text-brand-gold font-bold font-en">2.44</span></p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-premium flex flex-col justify-center">
+                    <div class="flex items-center gap-3 mb-3 text-gray-500">
+                        <div class="p-2 bg-brand-gold/20 rounded-lg text-amber-700"><i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></div>
+                        <span class="text-sm font-medium">إجمالي النقرات</span>
+                    </div>
+                    <div class="text-3xl font-bold text-slate-900 font-en">2,066</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Image Break (b1) -->
+        <section class="reveal relative h-64 rounded-3xl overflow-hidden shadow-premium group">
+            <img id="b1" src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1200&auto=format&fit=crop" alt="Cookies b1" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-purple/80 via-brand-purple/30 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-8 flex items-end justify-between">
+                <div>
+                    <h3 class="text-white text-2xl font-bold mb-1">جودة تستحق المشاركة</h3>
+                    <p class="text-brand-goldLight text-sm">المحتوى البصري هو المحرك الأساسي للأداء</p>
+                </div>
+                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white font-en font-bold">b1</div>
+            </div>
+        </section>
+
+        <!-- Section 2: Platform Battle -->
+        <section class="reveal print-break">
+            <div class="mb-6 flex justify-between items-end">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">أداء المنصات الإعلانية</h2>
+                    <p class="text-gray-500 text-sm mt-1">مقارنة تفصيلية بين سناب شات وتيك توك من حيث التكلفة والفعالية.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Snapchat Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-premium">
+                    <div class="flex justify-between items-start mb-6 pb-6 border-b border-gray-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center text-yellow-600">
+                                <i data-lucide="ghost" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-900">سناب شات</h3>
+                                <p class="text-sm text-gray-500">حملة الزيارات (Traffic)</p>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-sm text-gray-500 mb-1">الإنفاق</p>
+                            <p class="font-bold font-en text-lg">1,307.06 <span class="text-xs font-sans font-normal">ريال</span></p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-y-6 gap-x-4">
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">الظهور (Impressions)</p>
+                            <p class="font-en font-bold text-xl text-slate-800">93,368</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">الوصول (Reach)</p>
+                            <p class="font-en font-bold text-xl text-slate-800">32,930</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">النقرات (Clicks)</p>
+                            <p class="font-en font-bold text-xl text-emerald-600">1,642</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">معدل النقر (CTR)</p>
+                            <p class="font-en font-bold text-xl text-emerald-600">1.76%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between text-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="text-gray-500">تكلفة الألف ظهور (CPM)</span>
+                            <span class="font-bold font-en">14.00 ﷼</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-gray-500">تكلفة النقر (CPC)</span>
+                            <span class="font-bold font-en text-emerald-600">0.80 ﷼</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TikTok Card -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-premium">
+                    <div class="flex justify-between items-start mb-6 pb-6 border-b border-gray-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-black flex items-center justify-center text-white">
+                                <!-- Custom simple Tiktok icon -->
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-900">تيك توك</h3>
+                                <p class="text-sm text-gray-500">حملة الوعي والمتابعين</p>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-sm text-gray-500 mb-1">الإنفاق</p>
+                            <p class="font-bold font-en text-lg">361.55 <span class="text-xs font-sans font-normal">ريال</span></p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-y-6 gap-x-4">
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">الظهور (Impressions)</p>
+                            <p class="font-en font-bold text-xl text-slate-800">60,032</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">الوصول (Reach)</p>
+                            <p class="font-en font-bold text-xl text-slate-800">29,801</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">النقرات (Clicks)</p>
+                            <p class="font-en font-bold text-xl text-slate-800">424</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">معدل النقر (CTR)</p>
+                            <p class="font-en font-bold text-xl text-slate-800">0.71%</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between text-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="text-gray-500">تكلفة الألف ظهور (CPM)</span>
+                            <span class="font-bold font-en text-emerald-600">6.02 ﷼</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-gray-500">تكلفة النقر (CPC)</span>
+                            <span class="font-bold font-en">0.86 ﷼</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Insight block -->
+            <div class="mt-4 bg-brand-gold/10 border border-brand-gold/30 rounded-xl p-4 flex gap-4 items-start">
+                <i data-lucide="lightbulb" class="w-5 h-5 text-amber-600 mt-0.5 shrink-0"></i>
+                <p class="text-sm text-slate-800 leading-relaxed">
+                    <strong class="text-brand-purple">رؤية استراتيجية:</strong> منصة <span class="font-bold">سناب شات</span> تفوقت في جلب حجم زيارات كبير بتكلفة نقر منخفضة (CPC 0.80) ومعدل نقر ممتاز (1.76%). في المقابل، منصة <span class="font-bold">تيك توك</span> قدمت تكلفة ظهور (CPM) أقل بكثير، مما يجعلها مثالية لبناء الوعي والعلامة التجارية.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Funnel & Video Retention -->
+        <section class="reveal">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">تحليل قمع المحتوى (الاحتفاظ بالمشاهدين)</h2>
+                <p class="text-gray-500 text-sm mt-1">تتبع رحلة المشاهد داخل الفيديو الإعلاني وتحديد نقاط تسرب الانتباه.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-premium">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    
+                    <!-- Snapchat Funnel -->
+                    <div>
+                        <h3 class="font-bold text-slate-800 mb-6 flex items-center gap-2">
+                            <i data-lucide="ghost" class="w-5 h-5 text-yellow-500"></i>
+                            استبقاء فيديو سناب شات
+                        </h3>
+                        <div class="space-y-5">
+                            <!-- 25% -->
+                            <div class="relative">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-600">مشاهدة 25%</span>
+                                    <span class="font-en font-bold">16,545</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-3">
+                                    <div class="bg-yellow-400 h-3 rounded-full progress-bar-anim" style="width: 100%" data-width="100%"></div>
+                                </div>
+                            </div>
+                            <!-- 50% -->
+                            <div class="relative">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-600">مشاهدة 50%</span>
+                                    <span class="font-en font-bold">8,093</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-3">
+                                    <div class="bg-yellow-400 h-3 rounded-full progress-bar-anim opacity-80" style="width: 0%" data-width="48.9%"></div>
+                                </div>
+                            </div>
+                            <!-- 75% -->
+                            <div class="relative">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-600">مشاهدة 75%</span>
+                                    <span class="font-en font-bold">5,189</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-3">
+                                    <div class="bg-yellow-400 h-3 rounded-full progress-bar-anim opacity-60" style="width: 0%" data-width="31.3%"></div>
+                                </div>
+                            </div>
+                            <!-- 100% -->
+                            <div class="relative">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-red-600 flex items-center gap-1">مشاهدة 100% <i data-lucide="alert-circle" class="w-3 h-3"></i></span>
+                                    <span class="font-en font-bold text-red-600">744</span>
+                                </div>
+                                <div class="w-full bg-red-100 rounded-full h-3">
+                                    <div class="bg-red-500 h-3 rounded-full progress-bar-anim" style="width: 0%" data-width="4.5%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-red-600 mt-3 font-medium bg-red-50 p-2 rounded inline-block">تسرب حاد للمشاهدين في الثواني الأخيرة.</p>
+                    </div>
+
+                    <!-- TikTok Funnel -->
+                    <div>
+                        <h3 class="font-bold text-slate-800 mb-6 flex items-center gap-2">
+                            <i data-lucide="play-square" class="w-5 h-5 text-black"></i>
+                            استبقاء فيديو تيك توك
+                        </h3>
+                        <div class="space-y-5">
+                            <!-- 25% -->
+                            <div class="relative">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-600">مشاهدة 25%</span>
+                                    <span class="font-en font-bold">14,428</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-3">
+                                    <div class="bg-black h-3 rounded-full progress-bar-anim" style="width: 0%" data-width="100%"></div>
+                                </div>
+                            </div>
+                            <!-- 50% -->
+                            <div class="relative">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-600">مشاهدة 50%</span>
+                                    <span class="font-en font-bold">4,857</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-3">
+                                    <div class="bg-black h-3 rounded-full progress-bar-anim opacity-80" style="width: 0%" data-width="33.6%"></div>
+                                </div>
+                            </div>
+                            <!-- 75% -->
+                            <div class="relative">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-600">مشاهدة 75%</span>
+                                    <span class="font-en font-bold">2,824</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-3">
+                                    <div class="bg-black h-3 rounded-full progress-bar-anim opacity-60" style="width: 0%" data-width="19.5%"></div>
+                                </div>
+                            </div>
+                            <!-- 100% -->
+                            <div class="relative">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-emerald-600">مشاهدة 100%</span>
+                                    <span class="font-en font-bold text-emerald-600">1,828</span>
+                                </div>
+                                <div class="w-full bg-emerald-100 rounded-full h-3">
+                                    <div class="bg-emerald-500 h-3 rounded-full progress-bar-anim" style="width: 0%" data-width="12.6%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-emerald-700 mt-3 font-medium bg-emerald-50 p-2 rounded inline-block">معدل إكمال الفيديو أفضل مقارنة بسناب شات.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Image Break 2 (b2) & Conversions -->
+        <section class="reveal grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Conversions & Engagement -->
+            <div class="col-span-1 lg:col-span-2 space-y-6">
+                <!-- TikTok Community -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-premium">
+                    <h3 class="font-bold text-lg text-slate-900 mb-4 border-b border-gray-100 pb-2">نمو المجتمع والتفاعل (تيك توك)</h3>
+                    
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <div class="bg-gray-50 rounded-xl p-4 text-center">
+                            <span class="block text-xs text-gray-500 mb-1">زيارات الملف</span>
+                            <span class="font-en font-bold text-xl text-brand-purple">190</span>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-4 text-center">
+                            <span class="block text-xs text-gray-500 mb-1">متابعات جديدة</span>
+                            <span class="font-en font-bold text-xl text-brand-purple">39</span>
+                        </div>
+                        <div class="bg-emerald-50 rounded-xl p-4 text-center border border-emerald-100">
+                            <span class="block text-xs text-emerald-600 mb-1">معدل التحويل</span>
+                            <span class="font-en font-bold text-xl text-emerald-600">20.5%</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 text-red-600 rounded-full text-sm">
+                            <i data-lucide="heart" class="w-4 h-4"></i> إعجابات: <span class="font-en font-bold">123</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-600 rounded-full text-sm">
+                            <i data-lucide="bookmark" class="w-4 h-4"></i> مفضلات: <span class="font-en font-bold">30</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-sm">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i> تعليقات: <span class="font-en font-bold">5</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm">
+                            <i data-lucide="share-2" class="w-4 h-4"></i> مشاركات: <span class="font-en font-bold">6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snap Traffic -->
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-premium flex items-center justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900 mb-1">زيارات صفحة الهبوط (سناب شات)</h3>
+                        <p class="text-sm text-gray-500">تم رصد الزيارات الفعلية التي وصلت للصفحة</p>
+                    </div>
+                    <div class="w-20 h-20 bg-yellow-50 rounded-full flex items-center justify-center border-4 border-yellow-100">
+                        <span class="font-en font-bold text-2xl text-yellow-600">84</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image B2 -->
+            <div class="relative h-full min-h-[300px] rounded-3xl overflow-hidden shadow-premium group">
+                <img id="b2" src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop" alt="Cookies b2" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-brand-purple/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white font-en font-bold shadow-lg">b2</div>
+            </div>
+        </section>
+
+        <!-- Section 4: Decision Board -->
+        <section class="reveal print-break mb-10">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">لوحة القرارات والخطوات القادمة</h2>
+                <p class="text-gray-500 text-sm mt-1">توصيات تنفيذية لرفع كفاءة ميزانية الشهر القادم.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Action 1 -->
+                <div class="bg-white rounded-2xl p-6 border-t-4 border-brand-purple shadow-premium relative">
+                    <div class="absolute top-0 right-6 -mt-3 bg-brand-purple text-white px-3 py-0.5 rounded-full text-xs font-bold">قوة التحويل</div>
+                    <h3 class="font-bold text-slate-800 mt-2 mb-2 text-lg">الاستثمار في تيك توك</h3>
+                    <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                        أظهرت البيانات معدل تحويل استثنائي (<span class="font-bold text-brand-purple">20.5%</span>) من زيارة الملف إلى متابعة.
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-sm border border-gray-100">
+                        <span class="font-bold text-slate-700 block mb-1">الإجراء:</span>
+                        زيادة ميزانية تيك توك لبناء قاعدة جماهيرية قوية ومستدامة.
+                    </div>
+                </div>
+
+                <!-- Action 2 -->
+                <div class="bg-white rounded-2xl p-6 border-t-4 border-red-500 shadow-premium relative">
+                    <div class="absolute top-0 right-6 -mt-3 bg-red-500 text-white px-3 py-0.5 rounded-full text-xs font-bold">نقطة تسرب</div>
+                    <h3 class="font-bold text-slate-800 mt-2 mb-2 text-lg">معالجة محتوى سناب شات</h3>
+                    <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                        رغم جلب سناب لزيارات كثيرة وبتكلفة رخيصة، هناك انهيار في المشاهدة بالثواني الأخيرة (فقط 744 أكملوا الفيديو).
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-sm border border-gray-100">
+                        <span class="font-bold text-slate-700 block mb-1">الإجراء:</span>
+                        تسريع عرض "المنتج/الطلب" Call-to-action في أول 5 ثوانٍ من الفيديو.
+                    </div>
+                </div>
+
+                <!-- Action 3 -->
+                <div class="bg-white rounded-2xl p-6 border-t-4 border-brand-gold shadow-premium relative">
+                    <div class="absolute top-0 right-6 -mt-3 bg-brand-gold text-white px-3 py-0.5 rounded-full text-xs font-bold">فرصة نمو</div>
+                    <h3 class="font-bold text-slate-800 mt-2 mb-2 text-lg">تحسين جودة الزيارات</h3>
+                    <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                        عدد النقرات في سناب (1,642) مقابل زيارات الصفحة الفعالة (84) يشير إلى ضياع في مسار النقر.
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg text-sm border border-gray-100">
+                        <span class="font-bold text-slate-700 block mb-1">الإجراء:</span>
+                        فحص سرعة صفحة الهبوط، والتأكد من مطابقة الإعلان للمنتج المعروض.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="mt-20 py-8 border-t border-gray-200 text-center text-gray-400 text-sm no-print">
+            <p>تقرير أداء حصري لـ كوكيز بروسل • أُنشئ للقرارات الإدارية العليا.</p>
+        </footer>
+
+    </main>
+
+    <!-- Scripts for animations and icons -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Reveal Animation Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // Animate progress bars if inside this section
+                        const bars = entry.target.querySelectorAll('.progress-bar-anim');
+                        bars.forEach(bar => {
+                            const targetWidth = bar.getAttribute('data-width');
+                            // slight delay for visual effect
+                            setTimeout(() => {
+                                bar.style.width = targetWidth;
+                            }, 200);
+                        });
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+            
+            // Trigger animation for elements already in viewport on load
+            setTimeout(() => {
+                const bars = document.querySelectorAll('.progress-bar-anim');
+                bars.forEach(bar => {
+                    const rect = bar.getBoundingClientRect();
+                    if(rect.top < window.innerHeight) {
+                        bar.style.width = bar.getAttribute('data-width');
+                    }
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
